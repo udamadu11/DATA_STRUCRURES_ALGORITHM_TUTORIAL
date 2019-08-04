@@ -1,7 +1,7 @@
 #include<stdio.h>
 int main(){
     int i,n;
-    int large,secondLarge,thirdLarge;
+    int large,secondLarge;
     int arr[20];
 
     printf("Enter Size of Array :\n");
@@ -35,7 +35,6 @@ int main(){
 
     printf("Large Number is : %d\n",large);
     printf("Second Large Number is : %d\n",secondLarge);
-    printf("Third Large Number is : %d\n",thirdLarge);
     return 0;
     
 }
