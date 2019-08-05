@@ -16,7 +16,7 @@ int main(){
     printf("Enter Element to Add :");
     scanf("%d",&key);
 
-    for(i=n-1;i<=loc;i--){
+    for(i=n-1;i>=loc;i--){
         arr[i+1] = arr[i];
     }
     arr[loc]=key;
