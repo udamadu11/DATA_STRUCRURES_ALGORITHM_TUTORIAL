@@ -13,6 +13,7 @@ void append(void);
 int length(void);
 void display(void);
 void addAtBegin(void);
+void addAtAfter(void);
 
 void main(){
     int ch,len;
@@ -22,7 +23,8 @@ void main(){
         printf("2.Add at Begin\n");
         printf("3.length\n");
         printf("4.Display\n");
-        printf("5.Exit\n\n");
+        printf("5.Add at after\n");
+        printf("6.Exit\n\n");
 
         printf("Enter your Choice :\n");
         scanf("%d",&ch);
@@ -37,7 +39,9 @@ void main(){
                     break;
             case 4: display();
                     break;
-            case 5: exit(1);
+            case 5: addAtAfter();
+                    break;        
+            case 6: exit(1);
             default: printf("Invalid choice.....\n\n");
         }
     }
@@ -63,7 +67,19 @@ void append(){
     }
 }
 void addAtBegin(){
-    
+    struct node* temp;
+    temp = (struct node*)malloc(sizeof(struct node));
+    printf("Enter Node Data :\n");
+    scanf("%d",&temp->data);
+    temp->left = NULL;
+    temp->right=NULL;
+    if(root == NULL){
+        root = temp;
+    }else{
+        temp->right = root;
+        root->left = temp;
+        root = temp;
+    }
 }
 int length(){
     struct node* temp;
@@ -87,5 +103,31 @@ void display(){
             temp =temp->right;
         }
         printf("\n\n");
+    }
+}
+void addAtAfter(){
+    int loc,i=1;
+    struct node* temp,*p;
+    printf("Enter location :\n");
+    scanf("%d",&loc);
+    if(loc > length()){
+        printf("Invalid location\n");
+    }else{
+        struct node* temp;
+        temp = (struct node*)malloc(sizeof(struct node));
+        printf("Enter node Data :\n");
+        scanf("%d",&temp->data);
+        temp->right = NULL;
+        temp->left = NULL;
+        p =root;
+        while(loc > i){
+            p = p->right;
+            i++;
+        }
+        temp->right = p->right;
+        p->right->left = temp;
+        temp->left = p;
+        p->right = temp;
+        
     }
 }
