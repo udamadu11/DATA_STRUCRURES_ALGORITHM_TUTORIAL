@@ -14,6 +14,7 @@ int length(void);
 void display(void);
 void addAtBegin(void);
 void addAtAfter(void);
+void delete(void);
 
 void main(){
     int ch,len;
@@ -24,7 +25,8 @@ void main(){
         printf("3.length\n");
         printf("4.Display\n");
         printf("5.Add at after\n");
-        printf("6.Exit\n\n");
+        printf("6.Delete\n");
+        printf("7.Exit\n\n");
 
         printf("Enter your Choice :\n");
         scanf("%d",&ch);
@@ -40,8 +42,10 @@ void main(){
             case 4: display();
                     break;
             case 5: addAtAfter();
+                    break;
+            case 6: delete();
                     break;        
-            case 6: exit(1);
+            case 7: exit(1);
             default: printf("Invalid choice.....\n\n");
         }
     }
@@ -129,5 +133,35 @@ void addAtAfter(){
         temp->left = p;
         p->right = temp;
         
+    }
+}
+void delete(){
+    struct node* temp;
+    int loc;
+    printf("Enter Location :\n");
+    scanf("%d",&loc);
+    if(loc > length()){
+        printf("Invalid location\n");
+    }else if(loc == 1){
+        temp = root;
+        root = temp->right;
+        temp->right->left = root;
+        temp->left = NULL;
+        temp->right = NULL;
+        free(temp);
+    }else{
+        int i = 1;
+        struct node* p,*r;
+        p =root;
+        while(i < loc - 1){
+            p = p->right;
+            i++;
+        }
+        r = p->right;
+        p->right = r->right;
+        r->right->left = p;
+        r->left = NULL;
+        r->right = NULL;
+        free(r);
     }
 }
